@@ -1,0 +1,79 @@
+menu.UploadSpeed=Upload Speed
+menu.CPUFreq=CPU Frequency
+menu.FlashFreq=Flash Frequency
+menu.FlashMode=Flash Mode
+menu.FlashSize=Flash Size
+menu.PartitionScheme=Partition Scheme
+menu.DebugLevel=Core Debug Level
+menu.PSRAM=PSRAM
+menu.Revision=Board Revision
+
+##############################################################
+### DO NOT PUT BOARDS ABOVE THE OFFICIAL PROYECTILMX BOARDS! ###
+##############################################################
+
+robbuskidesp32.name=Robbus Kidsy ESP32
+
+robbuskidesp32.upload.tool=esptool_py
+robbuskidesp32.upload.maximum_size=1310720
+robbuskidesp32.upload.maximum_data_size=327680
+robbuskidesp32.upload.wait_for_upload_port=true
+
+robbuskidesp32.serial.disableDTR=true
+robbuskidesp32.serial.disableRTS=true
+
+robbuskidesp32.build.mcu=esp32
+robbuskidesp32.build.core=esp32
+robbuskidesp32.build.variant=RobbusKidsyEsp32
+robbuskidesp32.build.board=ROBBUS_KIDSY_ESP32
+
+robbuskidesp32.build.f_cpu=240000000L
+robbuskidesp32.build.flash_mode=dio
+robbuskidesp32.build.flash_size=4MB
+robbuskidesp32.build.boot=dio
+robbuskidesp32.build.partitions=default
+robbuskidesp32.build.defines=
+
+robbuskidesp32.menu.FlashFreq.80=80MHz
+robbuskidesp32.menu.FlashFreq.80.build.flash_freq=80m
+robbuskidesp32.menu.FlashFreq.40=40MHz
+robbuskidesp32.menu.FlashFreq.40.build.flash_freq=40m
+
+robbuskidesp32.menu.UploadSpeed.921600=921600
+robbuskidesp32.menu.UploadSpeed.921600.upload.speed=921600
+robbuskidesp32.menu.UploadSpeed.115200=115200
+robbuskidesp32.menu.UploadSpeed.115200.upload.speed=115200
+robbuskidesp32.menu.UploadSpeed.256000.windows=256000
+robbuskidesp32.menu.UploadSpeed.256000.upload.speed=256000
+robbuskidesp32.menu.UploadSpeed.230400.windows.upload.speed=256000
+robbuskidesp32.menu.UploadSpeed.230400=230400
+robbuskidesp32.menu.UploadSpeed.230400.upload.speed=230400
+robbuskidesp32.menu.UploadSpeed.460800.linux=460800
+robbuskidesp32.menu.UploadSpeed.460800.macosx=460800
+robbuskidesp32.menu.UploadSpeed.460800.upload.speed=460800
+robbuskidesp32.menu.UploadSpeed.512000.windows=512000
+robbuskidesp32.menu.UploadSpeed.512000.upload.speed=512000
+
+robbuskidesp32.menu.DebugLevel.none=None
+robbuskidesp32.menu.DebugLevel.none.build.code_debug=0
+robbuskidesp32.menu.DebugLevel.error=Error
+robbuskidesp32.menu.DebugLevel.error.build.code_debug=1
+robbuskidesp32.menu.DebugLevel.warn=Warn
+robbuskidesp32.menu.DebugLevel.warn.build.code_debug=2
+robbuskidesp32.menu.DebugLevel.info=Info
+robbuskidesp32.menu.DebugLevel.info.build.code_debug=3
+robbuskidesp32.menu.DebugLevel.debug=Debug
+robbuskidesp32.menu.DebugLevel.debug.build.code_debug=4
+robbuskidesp32.menu.DebugLevel.verbose=Verbose
+robbuskidesp32.menu.DebugLevel.verbose.build.code_debug=5
+
+robbuskidesp32.menu.PartitionScheme.default=Default
+robbuskidesp32.menu.PartitionScheme.default.build.partitions=default
+robbuskidesp32.menu.PartitionScheme.no_ota=No OTA (Large APP)
+robbuskidesp32.menu.PartitionScheme.no_ota.build.partitions=no_ota
+robbuskidesp32.menu.PartitionScheme.no_ota.upload.maximum_size=2097152
+robbuskidesp32.menu.PartitionScheme.min_spiffs=Minimal SPIFFS (Large APPS with OTA)
+robbuskidesp32.menu.PartitionScheme.min_spiffs.build.partitions=min_spiffs
+robbuskidesp32.menu.PartitionScheme.min_spiffs.upload.maximum_size=1966080
+
+##############################################################
