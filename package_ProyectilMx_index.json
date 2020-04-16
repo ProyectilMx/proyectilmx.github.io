@@ -1,7 +1,7 @@
 {
   "packages": [
     {
-      "name": "esp32",
+      "name": "ProyectilMx ESP32 Boards",
       "maintainer": "ProyectilMX",
       "websiteURL": "https://github.com/espressif/arduino-esp32",
       "email": "info@proyectil.mx",
@@ -10,7 +10,7 @@
       },
       "platforms": [
         {
-          "name": "esp32",
+          "name": "ProyectilMx ESP32",
           "architecture": "esp32",
           "version": "1.0.0",
           "category": "ESP32",
