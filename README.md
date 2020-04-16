@@ -1,1 +1,1 @@
-ProyectilMX releases
+proyectilmx.github.io
