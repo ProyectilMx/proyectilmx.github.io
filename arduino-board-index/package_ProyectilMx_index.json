@@ -23,14 +23,15 @@
           },
           "boards": [
             {
-              "name": "Robbus Kidsy ESP32"
+              "name": "Enigma Box"
             }
           ],
           "toolsDependencies": [
             {
-              "packager": "proyectilMx-esp32",
-              "name": "xtensa-esp32-elf-gcc",
-              "version": "1.22.0-80-g6c4433a-5.2.0"
+              "packager": "arduino",
+              "name": "avrdude",
+              "version": "6.3.0-arduino2"
+            }
             },
             {
               "packager": "proyectilMx-esp32",
