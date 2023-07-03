@@ -1,21 +1,21 @@
 {
   "packages": [
     {
-      "name": "proyectilMx-esp32",
+      "name": "proyectilMx",
       "maintainer": "ProyectilMX",
       "websiteURL": "https://github.com/ProyectilMx",
-      "email": "info@proyectil.mx",
+      "email": "misael@proyectil.mx",
       "help": {
         "online": "http://proyectil.mx"
       },
       "platforms": [
         {
-          "name": "ProyectilMx ESP32",
-          "architecture": "esp32",
+          "name": "ProyectilMx Boards",
+          "architecture": "avr",
           "version": "1.0.0",
-          "category": "ESP32",
-          "url": "https://proyectilmx.github.io/Robbus-Kidsy-1.0.0.zip",
-          "archiveFileName": "Robbus-Kidsy-1.0.0.zip",
+          "category": "contributed",
+          "url": "https://proyectilmx.github.io/pmxBoards-1.0.0.zip",
+          "archiveFileName": "pmxBoards-1.0.0.zip",
           "checksum": "SHA-256:dc12f82991899b2c5a7771e4dfa441ecc200216e1090e2fea553c26de76bc405",
           "size": "35770139",
           "help": {
