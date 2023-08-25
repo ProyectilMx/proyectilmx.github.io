@@ -1,0 +1,10 @@
+{
+  "packages": [
+    {
+    "name": "proyectilmx",
+      "maintainer": "Proyectil MX",
+      "websiteURL": "https://github.com/ProyectilMx",
+      "email": "misael@proyectil.mx",
+    }
+    ]
+}
