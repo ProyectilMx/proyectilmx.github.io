@@ -1,14 +1,14 @@
 {
   "packages": [
     {
-      "name": "ProyectilMx",
+      "name": "proyectilmx",
       "maintainer": "ProyectilMX",
       "websiteUrl": "https://www.proyectil.mx/",
       "Url": "https://proyectilmx.github.io/proyectil-boards-index/package_proyectil.mx_boards_index.json",
       "email": "misael@proyectil.mx",
       "platforms": [
         {
-          "name": "proyectilMx",
+          "name": "ProyectilMx Boards",
           "architecture": "avr",
           "version": "1.0.0",
           "deprecated": false,
@@ -19,19 +19,7 @@
           "size": "10713833",
           "boards": [
             {
-              "name": "EBOX"
-            },
-            {
-              "name": ""
-            },
-            {
-              "name": ""
-            },
-            {
-              "name": ""
-            },
-            {
-              "name": ""
+              "name": "EBox"
             }
           ],
           "help": {},
