@@ -4,8 +4,8 @@
 # For more info:
 # https://arduino.github.io/arduino-cli/latest/platform-specification/
 
-name=Proyectil Boards
-version=1.0.0
+name=Proyectil AVR Boards
+version=1.0.1
 
 # AVR compile variables
 # ---------------------
