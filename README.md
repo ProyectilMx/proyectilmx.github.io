@@ -1,10 +1,21 @@
-Biblioteca Proyectil Mx Boards 
+# Biblioteca Proyectil Mx Boards 
 
-Link para instalar placas de MCU AVR
-https://proyectilmx.github.io/arduino-board-index/package_ProyectilMx_index.json
+### Link para instalar biblioteca boards Proyectil Mx
 
-Si se utiliza el programador USBTinyISP se recomienda instalar el driver libusbK 
+```
+https://proyectilmx.github.io/proyectil-boards-index/package_proyectil.mx_boards_index.json
+```
 
-Calcular checksum con comand prompt de windows
+> [!TIP]
+> **Si utiliza el programador USBTinyISP se recomienda instalar el driver libusbK**
 
-certutil -hashfile <ruta del archivo .zip , .tar .. etc>  sha256
+> Puede usar el software Zadig
+
+![image](https://github.com/user-attachments/assets/9f983d49-0593-47f8-8581-80d12ff97733)
+
+ 
+
+## Checksum
+Calcular checksum con command prompt de Windows
+
+``certutil -hashfile <ruta del archivo .zip , .tar .. etc>  sha256``
