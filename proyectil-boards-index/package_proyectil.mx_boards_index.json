@@ -8,7 +8,7 @@
       "email": "misael@proyectil.mx",
       "platforms": [
         {
-          "name": "Proyectil Mx Boards",
+          "name": "Proyectil AVR Boards",
           "architecture": "avr",
           "version": "1.0.0",
           "deprecated": false,
