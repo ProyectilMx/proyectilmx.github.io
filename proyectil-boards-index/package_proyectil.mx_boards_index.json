@@ -10,16 +10,19 @@
         {
           "name": "Proyectil AVR Boards",
           "architecture": "avr",
-          "version": "1.0.0",
+          "version": "1.0.1",
           "deprecated": false,
           "category": "Contributed",
-          "url": "https://proyectilmx.github.io/proyectil-boards-index/proyectilmx-boards-v1.0.0.zip",
-          "archiveFileName": "proyectilmx-boards-v1.0.0.zip",
-          "checksum": "SHA-256:b65ae23a707d675ae3354e2da32f564c64e7e0aba5ac3e74c5cdbc62c0c45ccf",
-          "size": "10713833",
+          "url": "https://proyectilmx.github.io/proyectil-boards-index/proyectilmx-boards-v1.0.1.zip",
+          "archiveFileName": "proyectilmx-boards-v1.0.1.zip",
+          "checksum": "SHA-256:e494e8dac7ff103692617d36236c17cccc73ae0369bd9cffe305839b814c8fe2",
+          "size": "10710114",
           "boards": [
             {
               "name": "Enigma Box"
+            },
+            {
+              "name": "Modulo RFID"
             }
           ],
           "help": {},

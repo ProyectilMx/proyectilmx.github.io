@@ -8,11 +8,12 @@
 ###########################################################################################################
 
 # Menu options
-# menu.clock=Clock
+menu.clock=Clock
 # menu.BOD=BOD
 # menu.eeprom=EEPROM
 # menu.LTO=Compiler LTO
 menu.variant=Variant
+menu.cpu=Processor
 # menu.bootloader=Bootloader
 # menu.baudrate=Baud rate
 
@@ -109,7 +110,7 @@ ebox.menu.variant.modelPB.build.mcu=atmega328pb
  # ebox.menu.BOD.2v7=BOD 2.7V
  # ebox.menu.BOD.2v7.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}101
  # ebox.menu.BOD.4v3=BOD 4.3V
-ebox.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}100
+ebox.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}101
  # ebox.menu.BOD.1v8=BOD 1.8V
  # ebox.menu.BOD.1v8.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}110
  # ebox.menu.BOD.disabled=BOD  disabled
@@ -244,6 +245,62 @@ ebox.build.f_cpu=8000000L
 # ebox.menu.clock.1MHz_internal.build.f_cpu=1000000L
 
 
+#############################
+#### Modulo RFID     ####
+#############################
 
 
+# General
+mrfid.name=Modulo RFID
+mrfid.upload.tool=avrdude
+mrfid.upload.maximum_data_size=2048
+mrfid.bootloader.tool=avrdude
+mrfid.bootloader.unlock_bits=0xff
+mrfid.bootloader.lock_bits=0xff
+mrfid.build.core=MCUdude_corefiles
+mrfid.build.board=AVR_ATmega328
+mrfid.build.bootloader_led=led+b5
+mrfid.build.extra_flags={build.clkpr}
 
+mrfid.upload.maximum_size=32384
+mrfid.upload.protocol=urclock
+mrfid.upload.uartpins=uart0_rxd0_txd1
+mrfid.build.export_merged_output=true
+mrfid.bootloader.file=urboot/{build.mcu}/watchdog_1_s/autobaud/{upload.uartpins}/{build.bootloader_led}/urboot_{build.mcu}_pr_ee_ce.hex
+
+mrfid.bootloader.high_fuses=0xdf
+mrfid.upload.speed={upload.default_speed}
+
+# Variants
+mrfid.menu.cpu.modelP=Atmega328P 
+mrfid.menu.cpu.modelP.bootloader.cksel_bits=0111
+mrfid.menu.cpu.modelP.bootloader.cfd_bit=1
+mrfid.menu.cpu.modelP.build.variant=standard
+mrfid.menu.cpu.modelP.build.mcu=atmega328p
+
+mrfid.menu.cpu.modelPB=Atemega328PB 
+mrfid.menu.cpu.modelPB.bootloader.cksel_bits=1111
+mrfid.menu.cpu.modelPB.bootloader.cfd_bit=0
+mrfid.menu.cpu.modelPB.build.variant=pb-variant
+mrfid.menu.cpu.modelPB.build.mcu=atmega328pb
+
+mrfid.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}101
+
+mrfid.compiler.c.extra_flags=-Wextra -flto -g
+mrfid.compiler.c.elf.extra_flags=-w -flto -g
+mrfid.compiler.cpp.extra_flags=-Wextra -flto -g
+mrfid.ltoarcmd=avr-gcc-ar
+
+
+# Clock frequencies
+mrfid.menu.clock.16MHz_external=Crystal Clock 16 MHz
+mrfid.menu.clock.16MHz_external.upload.default_speed=115200
+mrfid.menu.clock.16MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+mrfid.menu.clock.16MHz_external.build.clkpr=
+mrfid.menu.clock.16MHz_external.build.f_cpu=16000000L
+
+mrfid.menu.clock.8MHz_internal=Internal Clock 8 MHz
+mrfid.menu.clock.8MHz_internal.upload.default_speed=38400
+mrfid.menu.clock.8MHz_internal.bootloader.low_fuses=0xe2
+mrfid.menu.clock.8MHz_internal.build.clkpr=
+mrfid.menu.clock.8MHz_internal.build.f_cpu=8000000L
