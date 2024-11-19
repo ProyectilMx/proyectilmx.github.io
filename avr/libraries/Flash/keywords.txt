@@ -1,27 +1,36 @@
-#######################################
-# Syntax Coloring Map Flash
-#######################################
+#############################################
+# Syntax Coloring Map For Flash and Urboot
+#############################################
 
-#######################################
+#############################################
 # Datatypes (KEYWORD1)
-#######################################
+#############################################
 
 Flash	KEYWORD1
-flash	KEYWORD1
 
-#######################################
+#############################################
 # Methods and Functions (KEYWORD2)
-#######################################
-erase_page	KEYWORD2
-fill_page	KEYWORD2
+#############################################
+
+# Flash class
+set_far_address	KEYWORD2
+check_writable	KEYWORD2
+clear_buffer	KEYWORD2
+read_buffer	KEYWORD2
+write_buffer	KEYWORD2
+buffer_size	KEYWORD2
+write	KEYWORD2
 write_page	KEYWORD2
-read	KEYWORD2
-get_address	KEYWORD2
-put	KEYWORD2
+fetch_page	KEYWORD2
+fetch_data	KEYWORD2
 get	KEYWORD2
+put	KEYWORD2
 
-#######################################
+# Optiboot
+urbootPageWrite	KEYWORD2
+urflashWrite	KEYWORD2
+urflashRead	KEYWORD2
+
+############################################
 # Constants (LITERAL1)
-#######################################
-flash_space	LITERAL1
-
+############################################

@@ -1,69 +1,53 @@
-/**
- * @file Flash.h
- * @author MCUdude (https://github.com/MCUdude)
- * @brief A light-weight library that lets you read and write to the internal
-          flash memory without using a RAM buffer.
- * @date 2021-09-11
- * @copyright Copyright (c) 2021
- *
- */
-
 #ifndef FLASH_H
 #define FLASH_H
 
 #include <Arduino.h>
-#include <avr/boot.h>
+#include "urboot.h"
 
 class Flash
 {
   public:
-    Flash();
-    static void erase_page(uint8_t page_number);
-    static bool fill_page(uint8_t page_number, uint8_t data);
-    static void write_page(uint8_t page_number);
-    static uint8_t read(uint8_t page_number, uint8_t address);
-    static uint16_t get_address(uint8_t page_number, uint8_t address);
+    Flash(const uint8_t *flash_array, const uint16_t flash_array_size, uint8_t *ram_array, const uint16_t ram_array_size = SPM_PAGESIZE);
+    #ifdef RAMPZ
+      void set_far_address(uint32_t address);
+    #endif
+    bool check_writable();
+    void clear_buffer(uint8_t fill = 0x00);
+    uint8_t read_buffer(uint8_t index);
+    void write_buffer(uint8_t index, uint8_t value);
+    uint16_t buffer_size();
+    void write(uint16_t flash_start_address, uint16_t length, uint16_t ram_buffer_start_address = 0);
+    void write_page(uint16_t flash_page_number);
+    void fetch_page(uint16_t flash_page_number);
+    void fetch_data(uint16_t flash_start_address, uint16_t flash_stop_address);
 
-    /**
-     * @brief Template function to 'put' objects in the flash buffer.
-     * Adressing within a page is handled automatically.
-     *
-     * @param page_number Page number to write to
-     * @param t Variable/struct/object etc. to write to flash
-     * @return const uint8_t& number of bytes currently in the flash buffer
-     */
-    template <typename T> static const uint8_t &put(uint8_t page_number, const T &t)
+    // Operator overload to be able to read and write directly to the RAM array from a byte level
+    uint8_t& operator[] (int16_t index);
+
+    // Template function to 'put' objects in RAM array
+    template <typename T> const T &put(uint16_t idx, const T &t)
     {
       const uint8_t *ptr = (const uint8_t*) &t;
-      for(uint8_t count = 0; count < sizeof(T); count++)
-        fill_page(page_number, *ptr++);
-      return flash_index;
-    }
-
-    /**
-     * @brief Template function to 'get' objects from the flash memory
-     *
-     * @param page_number Page number to read from
-     * @param page_address Address in flash page to start reading from
-     * @param t Variable/struct/object etc. to store read data to
-     * @return T& Data stored in passed variable
-     */
-    template <typename T> static T &get(uint8_t page_number, uint8_t page_address, T &t)
-    {
-      uint8_t *ptr = (uint8_t*) &t;
-      for(uint8_t count = 0; count < sizeof(T); count++)
-        *ptr++ = read(page_number, page_address + count);
+      for(uint16_t count = 0; count < sizeof(T); count++)
+        _ram_array[idx + count] = *ptr++;
       return t;
     }
 
-    static const uint8_t *flash_space; // Pointer to allocated flash space
+    // Template function to 'get' objects from the RAM array
+    template <typename T> T &get(uint16_t idx, T &t)
+    {
+      uint8_t *ptr = (uint8_t*) &t;
+      for(uint16_t count = 0; count < sizeof(T); count++)
+        *ptr++ = _ram_array[idx + count];
+      return t;
+    }
 
   private:
-    static uint8_t flash_index; // Keeps track of the address within a page when filling the buffer
-
+    const uint8_t *_flash_array;      // Pointer to allocated flash space
+    uint32_t _far_flash_array_addr;   // Address to far memory location if allocated space is above 64kiB
+    const uint16_t _flash_array_size; // Size of a flash page in bytes (64, 128 or 256 bytes)
+    uint8_t *_ram_array;              // Pointer to allocated RAM array
+    const uint16_t _ram_array_size;   // Size of allocated RAM array
 };
-
-// Static object to use in user program
-static Flash flash;
 
 #endif

@@ -1,414 +1,249 @@
-## prueba #1 Misael 
+###########################################################################################################
+## This file is created by MCUdude for use with MiniCore                                                 ##
+## https://github.com/MCUdude/MiniCore                                                                   ##
+##                                                                                                       ##
+## This is the file where fuse settings, clock frequencies, upload ports, bootloaders and                ##
+## compiler flags are located.                                                                           ##
+##                                                                                                       ##
+###########################################################################################################
 
-menu.cpu=Processor
-menu.BOD=BOD
-menu.eeprom=EEPROM
-menu.clock=Clock
-menu.bootloader=Bootloader
-##############################################################
-###  THE OFFICIAL PROYECTILMX BOARDS! ###
-##############################################################
+# Menu options
+# menu.clock=Clock
+# menu.BOD=BOD
+# menu.eeprom=EEPROM
+# menu.LTO=Compiler LTO
+menu.variant=Variant
+# menu.bootloader=Bootloader
+# menu.baudrate=Baud rate
 
+#############################
+#### Proyectil Ebox      ####
+#############################
+
+# General
 ebox.name=Enigma Box
- 
 ebox.upload.tool=avrdude
-ebox.upload.protocol=arduino
+ebox.upload.maximum_data_size=2048
 ebox.bootloader.tool=avrdude
+ebox.bootloader.unlock_bits=0xff
+ebox.bootloader.lock_bits=0xff
+ebox.build.core=MCUdude_corefiles
+ebox.build.board=AVR_ATmega328
+ebox.build.bootloader_led=led+b5
+ebox.build.extra_flags={build.clkpr}
 
-## Enigma Box / Atmega328PB
-## -------------------------
+# Upload port select
+# ebox.menu.bootloader.uart0=Yes (UART0)
+ebox.upload.maximum_size=32384
+ebox.upload.protocol=urclock
+ebox.upload.uartpins=uart0_rxd0_txd1
+ebox.build.export_merged_output=true
+ebox.bootloader.file=urboot/{build.mcu}/watchdog_1_s/autobaud/{upload.uartpins}/{build.bootloader_led}/urboot_{build.mcu}_pr_ee_ce.hex
 
-ebox.menu.cpu.atmega328pbic= ATmega328PB (Internal Clock 8Mhz) 
+ # ebox.menu.bootloader.uart1=Yes (UART1 328PB only)
+ # ebox.menu.bootloader.uart1.upload.maximum_size=32384
+ # ebox.menu.bootloader.uart1.upload.protocol=urclock
+ # ebox.menu.bootloader.uart1.upload.uartpins=uart1_rxb4_txb3
+ # ebox.menu.bootloader.uart1.build.export_merged_output=true
+# ebox.menu.bootloader.uart1.bootloader.file=urboot/{build.mcu}/watchdog_1_s/autobaud/{upload.uartpins}/{build.bootloader_led}/urboot_{build.mcu}_pr_ee_ce.hex
 
-ebox.menu.cpu.atmega328pbic.bootloader.file=optiboot_m328pb.hex
-ebox.menu.cpu.atmega328pbic.bootloader.unlock_bits=0xFF
-ebox.menu.cpu.atmega328pbic.bootloader.lock_bits=0xCF
-ebox.menu.cpu.atmega328pbic.bootloader.low_fuses=0xE2
-ebox.menu.cpu.atmega328pbic.bootloader.high_fuses=0xD6
-ebox.menu.cpu.atmega328pbic.bootloader.extended_fuses=0xFD
-ebox.menu.cpu.atmega328pbic.upload.maximum_size=32256
-ebox.menu.cpu.atmega328pbic.upload.maximum_data_size=2048
-ebox.menu.cpu.atmega328pbic.upload.speed=57600
-ebox.menu.cpu.atmega328pbic.build.mcu=atmega328pb
-ebox.menu.cpu.atmega328pbic.build.board=AVR_UNO
-ebox.menu.cpu.atmega328pbic.build.core=arduino:arduino
-ebox.menu.cpu.atmega328pbic.build.variant=atmega328pb
-ebox.menu.cpu.atmega328pbic.build.f_cpu=8 MHz
-
-## Enigma Box / Atmega328P
-## -------------------------
-
-ebox.menu.cpu.atmega328p= ATmega328P
-
-ebox.menu.cpu.atmega328old.upload.maximum_size=30720
-ebox.menu.cpu.atmega328old.upload.maximum_data_size=2048
-ebox.menu.cpu.atmega328old.upload.speed=57600
-
-ebox.menu.cpu.atmega328old.bootloader.low_fuses=0xFF
-ebox.menu.cpu.atmega328old.bootloader.high_fuses=0xDA
-ebox.menu.cpu.atmega328old.bootloader.extended_fuses=0xFD
-ebox.menu.cpu.atmega328old.bootloader.file=atmega/ATmegaBOOT_168_atmega328.hex
-
-ebox.menu.cpu.atmega328old.build.mcu=atmega328p
-
-##############################################################
-13.name=ProTiny13
-
-13.build.mcu=attiny13a
-13.build.variant=attiny13a
-13.build.core=microcore
-13.build.board=attiny
-13.build.extra_flags=
-13.bootloader.tool=avrdude
-13.bootloader.high_fuses=0x{fuse.selfprogen}{fuse.bod}
-13.bootloader.unlock_bits=0xff
-13.bootloader.lock_bits=0xfe
-13.upload.tool=avrdude
-13.upload.maximum_data_size=64
-
-# Clock frequencies
-13.menu.clock.9M6=9.6 MHz internal osc.
-13.menu.clock.9M6.bootloader.clock=internal_oscillator
-13.menu.clock.9M6.bootloader.low_fuses=0b0{bootloader.eesave_bit}111010
-13.menu.clock.9M6.bootloader.baudrate=57600
-13.menu.clock.9M6.bootloader.speed=9600000_hz
-13.menu.clock.9M6.bootloader.speed-125=9480000_hz
-13.menu.clock.9M6.bootloader.speed-250=9360000_hz
-13.menu.clock.9M6.bootloader.speed-375=9240000_hz
-13.menu.clock.9M6.bootloader.speed-500=9120000_hz
-13.menu.clock.9M6.bootloader.speed-625=9000000_hz
-13.menu.clock.9M6.bootloader.speed-750=8880000_hz
-13.menu.clock.9M6.bootloader.speed-875=8760000_hz
-13.menu.clock.9M6.bootloader.speed-1000=8640000_hz
-13.menu.clock.9M6.bootloader.speed+125=9720000_hz
-13.menu.clock.9M6.bootloader.speed+250=9840000_hz
-13.menu.clock.9M6.bootloader.speed+375=9960000_hz
-13.menu.clock.9M6.bootloader.speed+500=9720000_hz
-13.menu.clock.9M6.build.f_cpu=9600000L
-
-13.menu.clock.4M8=4.8 MHz internal osc.
-13.menu.clock.4M8.bootloader.clock=internal_oscillator
-13.menu.clock.4M8.bootloader.low_fuses=0b0{bootloader.eesave_bit}111001
-13.menu.clock.4M8.bootloader.baudrate=38400
-13.menu.clock.4M8.bootloader.speed=4800000_hz
-13.menu.clock.4M8.bootloader.speed-125=4740000_hz
-13.menu.clock.4M8.bootloader.speed-250=4680000_hz
-13.menu.clock.4M8.bootloader.speed-375=4620000_hz
-13.menu.clock.4M8.bootloader.speed-500=4560000_hz
-13.menu.clock.4M8.bootloader.speed-625=4500000_hz
-13.menu.clock.4M8.bootloader.speed-750=4440000_hz
-13.menu.clock.4M8.bootloader.speed-875=4380000_hz
-13.menu.clock.4M8.bootloader.speed-1000=4320000_hz
-13.menu.clock.4M8.bootloader.speed+125=4860000_hz
-13.menu.clock.4M8.bootloader.speed+250=4920000_hz
-13.menu.clock.4M8.bootloader.speed+375=4980000_hz
-13.menu.clock.4M8.bootloader.speed+500=5040000_hz
-13.menu.clock.4M8.build.f_cpu=4800000L
-
-13.menu.clock.1M2=1.2 MHz internal osc.
-13.menu.clock.1M2.bootloader.clock=internal_oscillator
-13.menu.clock.1M2.bootloader.low_fuses=0b0{bootloader.eesave_bit}101010
-13.menu.clock.1M2.bootloader.baudrate=9600
-13.menu.clock.1M2.bootloader.speed=1200000_hz
-13.menu.clock.1M2.bootloader.speed-125=1185000_hz
-13.menu.clock.1M2.bootloader.speed-250=1170000_hz
-13.menu.clock.1M2.bootloader.speed-375=1155000_hz
-13.menu.clock.1M2.bootloader.speed-500=1140000_hz
-13.menu.clock.1M2.bootloader.speed-625=1125000_hz
-13.menu.clock.1M2.bootloader.speed-750=1110000_hz
-13.menu.clock.1M2.bootloader.speed-875=1095000_hz
-13.menu.clock.1M2.bootloader.speed-1000=1080000_hz
-13.menu.clock.1M2.bootloader.speed+125=1215000_hz
-13.menu.clock.1M2.bootloader.speed+250=1230000_hz
-13.menu.clock.1M2.bootloader.speed+375=1245000_hz
-13.menu.clock.1M2.bootloader.speed+500=1260000_hz
-13.menu.clock.1M2.build.f_cpu=1200000L
-
-13.menu.clock.600k=600 kHz internal osc.
-13.menu.clock.600k.bootloader.clock=internal_oscillator
-13.menu.clock.600k.bootloader.low_fuses=0b0{bootloader.eesave_bit}101001
-13.menu.clock.600k.bootloader.baudrate=4800
-13.menu.clock.600k.bootloader.speed=600000_hz
-13.menu.clock.600k.bootloader.speed-125=592500_hz
-13.menu.clock.600k.bootloader.speed-250=585000_hz
-13.menu.clock.600k.bootloader.speed-375=577500_hz
-13.menu.clock.600k.bootloader.speed-500=570000_hz
-13.menu.clock.600k.bootloader.speed-625=562500_hz
-13.menu.clock.600k.bootloader.speed-750=555000_hz
-13.menu.clock.600k.bootloader.speed-875=547500_hz
-13.menu.clock.600k.bootloader.speed-1000=540000_hz
-13.menu.clock.600k.bootloader.speed+125=607500_hz
-13.menu.clock.600k.bootloader.speed+250=615000_hz
-13.menu.clock.600k.bootloader.speed+375=622500_hz
-13.menu.clock.600k.bootloader.speed+500=630000_hz
-13.menu.clock.600k.build.f_cpu=600000L
-
-13.menu.clock.128k=128 KHz internal osc.
-13.menu.clock.128k.bootloader.clock=internal_oscillator
-13.menu.clock.128k.bootloader.low_fuses=0b0{bootloader.eesave_bit}111011
-13.menu.clock.128k.bootloader.baudrate=600
-13.menu.clock.128k.bootloader.speed=128000_hz
-13.menu.clock.128k.bootloader.speed-125=126400_hz
-13.menu.clock.128k.bootloader.speed-250=124800_hz
-13.menu.clock.128k.bootloader.speed-375=123200_hz
-13.menu.clock.128k.bootloader.speed-500=121600_hz
-13.menu.clock.128k.bootloader.speed-625=120000_hz
-13.menu.clock.128k.bootloader.speed-750=118400_hz
-13.menu.clock.128k.bootloader.speed-875=116800_hz
-13.menu.clock.128k.bootloader.speed-1000=115200_hz
-13.menu.clock.128k.bootloader.speed+125=129600_hz
-13.menu.clock.128k.bootloader.speed+250=131200_hz
-13.menu.clock.128k.bootloader.speed+375=132800_hz
-13.menu.clock.128k.bootloader.speed+500=134400_hz
-13.menu.clock.128k.build.f_cpu=128000L
-
-13.menu.clock.20M=20 MHz external clock
-13.menu.clock.20M.bootloader.clock=external_oscillator
-13.menu.clock.20M.bootloader.low_fuses=0b0{bootloader.eesave_bit}111000
-13.menu.clock.20M.bootloader.baudrate=115200
-13.menu.clock.20M.bootloader.speed=20000000_hz
-13.menu.clock.20M.bootloader.speed-125=20000000_hz
-13.menu.clock.20M.bootloader.speed-250=20000000_hz
-13.menu.clock.20M.bootloader.speed-375=20000000_hz
-13.menu.clock.20M.bootloader.speed-500=20000000_hz
-13.menu.clock.20M.bootloader.speed-625=20000000_hz
-13.menu.clock.20M.bootloader.speed-750=20000000_hz
-13.menu.clock.20M.bootloader.speed-875=20000000_hz
-13.menu.clock.20M.bootloader.speed-1000=20000000_hz
-13.menu.clock.20M.bootloader.speed+125=20000000_hz
-13.menu.clock.20M.bootloader.speed+250=20000000_hz
-13.menu.clock.20M.bootloader.speed+375=20000000_hz
-13.menu.clock.20M.bootloader.speed+500=20000000_hz
-13.menu.clock.20M.build.f_cpu=20000000L
-
-13.menu.clock.16M=16 MHz external clock
-13.menu.clock.16M.bootloader.clock=external_oscillator
-13.menu.clock.16M.bootloader.low_fuses=0b0{bootloader.eesave_bit}111000
-13.menu.clock.16M.bootloader.baudrate=115200
-13.menu.clock.16M.bootloader.speed=16000000_hz
-13.menu.clock.16M.bootloader.speed-125=16000000_hz
-13.menu.clock.16M.bootloader.speed-250=16000000_hz
-13.menu.clock.16M.bootloader.speed-375=16000000_hz
-13.menu.clock.16M.bootloader.speed-500=16000000_hz
-13.menu.clock.16M.bootloader.speed-625=16000000_hz
-13.menu.clock.16M.bootloader.speed-750=16000000_hz
-13.menu.clock.16M.bootloader.speed-875=16000000_hz
-13.menu.clock.16M.bootloader.speed-1000=16000000_hz
-13.menu.clock.16M.bootloader.speed+125=16000000_hz
-13.menu.clock.16M.bootloader.speed+250=16000000_hz
-13.menu.clock.16M.bootloader.speed+375=16000000_hz
-13.menu.clock.16M.bootloader.speed+500=16000000_hz
-13.menu.clock.16M.build.f_cpu=16000000L
-
-13.menu.clock.12M=12 MHz external clock
-13.menu.clock.12M.bootloader.clock=external_oscillator
-13.menu.clock.12M.bootloader.low_fuses=0b0{bootloader.eesave_bit}111000
-13.menu.clock.12M.bootloader.baudrate=115200
-13.menu.clock.12M.bootloader.speed=12000000_hz
-13.menu.clock.12M.bootloader.speed-125=12000000_hz
-13.menu.clock.12M.bootloader.speed-250=12000000_hz
-13.menu.clock.12M.bootloader.speed-375=12000000_hz
-13.menu.clock.12M.bootloader.speed-500=12000000_hz
-13.menu.clock.12M.bootloader.speed-625=12000000_hz
-13.menu.clock.12M.bootloader.speed-750=12000000_hz
-13.menu.clock.12M.bootloader.speed-875=12000000_hz
-13.menu.clock.12M.bootloader.speed-1000=12000000_hz
-13.menu.clock.12M.bootloader.speed+125=12000000_hz
-13.menu.clock.12M.bootloader.speed+250=12000000_hz
-13.menu.clock.12M.bootloader.speed+375=12000000_hz
-13.menu.clock.12M.bootloader.speed+500=12000000_hz
-13.menu.clock.12M.build.f_cpu=12000000L
-
-13.menu.clock.8M=8 MHz external clock
-13.menu.clock.8M.bootloader.clock=external_oscillator
-13.menu.clock.8M.bootloader.low_fuses=0b0{bootloader.eesave_bit}111000
-13.menu.clock.8M.bootloader.baudrate=115200
-13.menu.clock.8M.bootloader.speed=8000000_hz
-13.menu.clock.8M.bootloader.speed-125=8000000_hz
-13.menu.clock.8M.bootloader.speed-250=8000000_hz
-13.menu.clock.8M.bootloader.speed-375=8000000_hz
-13.menu.clock.8M.bootloader.speed-500=8000000_hz
-13.menu.clock.8M.bootloader.speed-625=8000000_hz
-13.menu.clock.8M.bootloader.speed-750=8000000_hz
-13.menu.clock.8M.bootloader.speed-875=8000000_hz
-13.menu.clock.8M.bootloader.speed-1000=8000000_hz
-13.menu.clock.8M.bootloader.speed+125=8000000_hz
-13.menu.clock.8M.bootloader.speed+250=8000000_hz
-13.menu.clock.8M.bootloader.speed+375=8000000_hz
-13.menu.clock.8M.bootloader.speed+500=8000000_hz
-13.menu.clock.8M.build.f_cpu=8000000L
-
-13.menu.clock.1M=1 MHz external clock
-13.menu.clock.1M.bootloader.clock=external_oscillator
-13.menu.clock.1M.bootloader.low_fuses=0b0{bootloader.eesave_bit}111000
-13.menu.clock.1M.bootloader.baudrate=19200
-13.menu.clock.1M.bootloader.speed=1000000_hz
-13.menu.clock.1M.bootloader.speed-125=1000000_hz
-13.menu.clock.1M.bootloader.speed-250=1000000_hz
-13.menu.clock.1M.bootloader.speed-375=1000000_hz
-13.menu.clock.1M.bootloader.speed-500=1000000_hz
-13.menu.clock.1M.bootloader.speed-625=1000000_hz
-13.menu.clock.1M.bootloader.speed-750=1000000_hz
-13.menu.clock.1M.bootloader.speed-875=1000000_hz
-13.menu.clock.1M.bootloader.speed-1000=1000000_hz
-13.menu.clock.1M.bootloader.speed+125=1000000_hz
-13.menu.clock.1M.bootloader.speed+250=1000000_hz
-13.menu.clock.1M.bootloader.speed+375=1000000_hz
-13.menu.clock.1M.bootloader.speed+500=1000000_hz
-13.menu.clock.1M.build.f_cpu=1000000L
+# ebox.menu.bootloader.no_bootloader=No bootloader
+# ebox.menu.bootloader.no_bootloader.upload.maximum_size=32768
+# ebox.menu.bootloader.no_bootloader.build.export_merged_output=false
+# ebox.menu.bootloader.no_bootloader.bootloader.file=empty/empty.hex
 
 # EEPROM
-13.menu.eeprom.keep=EEPROM retained
-13.menu.eeprom.keep.bootloader.eesave_bit=0
-13.menu.eeprom.erase=EEPROM not retained
-13.menu.eeprom.erase.bootloader.eesave_bit=1
+# ebox.menu.eeprom.keep=EEPROM retained
+# ebox.menu.eeprom.keep.bootloader.high_fuses=0xd7
+# ebox.menu.eeprom.erase=EEPROM not retained
+ebox.bootloader.high_fuses=0xdf
+
+# Baud rate
+# ebox.default=Default
+ebox.upload.speed={upload.default_speed}
+# ebox.menu.baudrate.1000000=1000000
+# ebox.menu.baudrate.1000000.upload.speed=1000000
+# ebox.menu.baudrate.500000=500000
+# ebox.menu.baudrate.500000.upload.speed=500000
+# ebox.menu.baudrate.460800=460800
+# ebox.menu.baudrate.460800.upload.speed=460800
+# ebox.menu.baudrate.250000=250000
+# ebox.menu.baudrate.250000.upload.speed=250000
+# ebox.menu.baudrate.230400=230400
+# ebox.menu.baudrate.230400.upload.speed=230400
+# ebox.menu.baudrate.125000=125000
+# ebox.menu.baudrate.125000.upload.speed=125000
+# ebox.menu.baudrate.115200=115200
+# ebox.menu.baudrate.115200.upload.speed=115200
+# ebox.menu.baudrate.57600=57600
+# ebox.menu.baudrate.57600.upload.speed=57600
+# ebox.menu.baudrate.38400=38400
+# ebox.menu.baudrate.38400.upload.speed=38400
+# ebox.menu.baudrate.19200=19200
+# ebox.menu.baudrate.19200.upload.speed=19200
+# ebox.menu.baudrate.9600=9600
+# ebox.menu.baudrate.9600.upload.speed=9600
+# ebox.menu.baudrate.4800=4800
+# ebox.menu.baudrate.4800.upload.speed=4800
+
+# Variants
+ebox.menu.variant.modelP=328P Internal Clock 8MHZ
+ebox.menu.variant.modelP.bootloader.cksel_bits=0111
+ebox.menu.variant.modelP.bootloader.cfd_bit=1
+ebox.menu.variant.modelP.build.variant=standard
+ebox.menu.variant.modelP.build.mcu=atmega328p
+
+# ebox.menu.variant.modelNonP=328 / 328A
+# ebox.menu.variant.modelNonP.bootloader.cksel_bits=0111
+# ebox.menu.variant.modelNonP.bootloader.cfd_bit=1
+# ebox.menu.variant.modelNonP.build.variant=standard
+# ebox.menu.variant.modelNonP.build.mcu=atmega328
+
+ebox.menu.variant.modelPB=328PB Internal Clock 8MHZ
+ebox.menu.variant.modelPB.bootloader.cksel_bits=1111
+ebox.menu.variant.modelPB.bootloader.cfd_bit=0
+ebox.menu.variant.modelPB.build.variant=pb-variant
+ebox.menu.variant.modelPB.build.mcu=atmega328pb
 
 # Brown out detection
-13.menu.BOD.2v7=BOD 2.7V
-13.menu.BOD.2v7.fuse.bod=b
-13.menu.BOD.4v3=BOD 4.3V
-13.menu.BOD.4v3.fuse.bod=9
-13.menu.BOD.1v8=BOD 1.8V
-13.menu.BOD.1v8.fuse.bod=d
-13.menu.BOD.disabled=BOD disabled
-13.menu.BOD.disabled.fuse.bod=f
+ # ebox.menu.BOD.2v7=BOD 2.7V
+ # ebox.menu.BOD.2v7.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}101
+ # ebox.menu.BOD.4v3=BOD 4.3V
+ebox.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}100
+ # ebox.menu.BOD.1v8=BOD 1.8V
+ # ebox.menu.BOD.1v8.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}110
+ # ebox.menu.BOD.disabled=BOD  disabled
+ # ebox.menu.BOD.disabled.bootloader.extended_fuses=0b1111{bootloader.cfd_bit}111
+
+# Compiler link time optimization
+# ebox.menu.LTO.Os_flto=LTO enabled
+ebox.compiler.c.extra_flags=-Wextra -flto -g
+ebox.compiler.c.elf.extra_flags=-w -flto -g
+ebox.compiler.cpp.extra_flags=-Wextra -flto -g
+ebox.ltoarcmd=avr-gcc-ar
+
+# ebox.menu.LTO.Os=LTO disabled
+# ebox.menu.LTO.Os.compiler.c.extra_flags=
+# ebox.menu.LTO.Os.compiler.c.elf.extra_flags=
+# ebox.menu.LTO.Os.compiler.cpp.extra_flags=
+# ebox.menu.LTO.Os.ltoarcmd=avr-ar
+
+# Clock frequencies
+# ebox.menu.clock.16MHz_external=External 16 MHz
+# box.menu.clock.16MHz_external.upload.default_speed=115200
+# ebox.menu.clock.16MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+# ebox.menu.clock.16MHz_external.build.clkpr=
+# ebox.menu.clock.16MHz_external.build.f_cpu=16000000L
+
+# ebox.menu.clock.20MHz_external=External 20 MHz
+# ebox.menu.clock.20MHz_external.upload.default_speed=115200
+# ebox.menu.clock.20MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+# ebox.menu.clock.20MHz_external.build.clkpr=
+# ebox.menu.clock.20MHz_external.build.f_cpu=20000000L
+
+# ebox.menu.clock.18_432MHz_external=External 18.432 MHz
+# ebox.menu.clock.18_432MHz_external.upload.default_speed=115200
+# ebox.menu.clock.18_432MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+# ebox.menu.clock.18_432MHz_external.build.clkpr=
+# ebox.menu.clock.18_432MHz_external.build.f_cpu=18432000L
+
+# ebox.menu.clock.14_7456MHz_external=External 14.7456 MHz
+# ebox.menu.clock.14_7456MHz_external.upload.default_speed=115200
+# ebox.menu.clock.14_7456MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+# ebox.menu.clock.14_7456MHz_external.build.clkpr=
+# ebox.menu.clock.14_7456MHz_external.build.f_cpu=14745600L
+
+# ebox.menu.clock.12MHz_external=External 12 MHz
+# ebox.menu.clock.12MHz_external.upload.default_speed=57600
+# ebox.menu.clock.12MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+# ebox.menu.clock.12MHz_external.build.clkpr=
+# ebox.menu.clock.12MHz_external.build.f_cpu=12000000L
+
+# ebox.menu.clock.11_0592MHz_external=External 11.0592 MHz
+# box.menu.clock.11_0592MHz_external.upload.default_speed=115200
+# ebox.menu.clock.11_0592MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+# ebox.menu.clock.11_0592MHz_external.build.clkpr=
+# ebox.menu.clock.11_0592MHz_external.build.f_cpu=11059200L 
+
+# ebox.menu.clock.9_216MHz_external=External 9.216 MHz
+# ebox.menu.clock.9_216MHz_external.upload.default_speed=115200
+# ebox.menu.clock.9_216MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+# ebox.menu.clock.9_216MHz_external.build.clkpr=
+# ebox.menu.clock.9_216MHz_external.build.f_cpu=9216000L
+
+# ebox.menu.clock.8MHz_external=External 8 MHz
+# ebox.menu.clock.8MHz_external.upload.default_speed=57600
+# ebox.menu.clock.8MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+# ebox.menu.clock.8MHz_external.build.clkpr=
+# ebox.menu.clock.8MHz_external.build.f_cpu=8000000L
+
+# ebox.menu.clock.7_3728MHz_external=External 7.3728 MHz
+# ebox.menu.clock.7_3728MHz_external.upload.default_speed=115200
+# ebox.menu.clock.7_3728MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+# ebox.menu.clock.7_3728MHz_external.build.clkpr=
+# ebox.menu.clock.7_3728MHz_external.build.f_cpu=7372800L
+
+# ebox.menu.clock.6MHz_external=External 6 MHz
+# ebox.menu.clock.6MHz_external.upload.default_speed=57600
+# ebox.menu.clock.6MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+# ebox.menu.clock.6MHz_external.build.clkpr=
+# ebox.menu.clock.6MHz_external.build.f_cpu=6000000L
+
+# ebox.menu.clock.4MHz_external=External 4 MHz
+# ebox.menu.clock.4MHz_external.upload.default_speed=9600
+# ebox.menu.clock.4MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+# ebox.menu.clock.4MHz_external.build.clkpr=
+# ebox.menu.clock.4MHz_external.build.f_cpu=4000000L
+
+# ebox.menu.clock.3_6864MHz_external=External 3.6864 MHz
+# box.menu.clock.3_6864MHz_external.upload.default_speed=115200
+# ebox.menu.clock.3_6864MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+# ebox.menu.clock.3_6864MHz_external.build.clkpr=
+# ebox.menu.clock.3_6864MHz_external.build.f_cpu=3686400L
+
+# ebox.menu.clock.2MHz_external=External 2 MHz
+# ebox.menu.clock.2MHz_external.upload.default_speed=9600
+# ebox.menu.clock.2MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+# ebox.menu.clock.2MHz_external.build.clkpr=
+# ebox.menu.clock.2MHz_external.build.f_cpu=2000000L
+
+#ebox.menu.clock.1_8432MHz_external=External 1.8432 MHz
+#ebox.menu.clock.1_8432MHz_external.upload.default_speed=115200
+#ebox.menu.clock.1_8432MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+#ebox.menu.clock.1_8432MHz_external.build.clkpr=
+# .menu.clock.1_8432MHz_external.build.f_cpu=1843200L
+
+# .menu.clock.1MHz_external=External 1 MHz
+# .menu.clock.1MHz_external.upload.default_speed=9600
+# .menu.clock.1MHz_external.bootloader.low_fuses=0b1111{bootloader.cksel_bits}
+# .menu.clock.1MHz_external.build.clkpr=
+# .menu.clock.1MHz_external.build.f_cpu=1000000L
+
+# ebox.menu.clock.8MHz_internal=Internal 8 MHz
+ebox.upload.default_speed=38400
+ebox.bootloader.low_fuses=0xe2
+ebox.build.clkpr=
+ebox.build.f_cpu=8000000L
+
+# ebox.menu.clock.4MHz_internal=Internal 4 MHz
+# ebox.menu.clock.4MHz_internal.upload.default_speed=9600
+# ebox.menu.clock.4MHz_internal.bootloader.low_fuses=0xe2
+# ebox.menu.clock.4MHz_internal.build.clkpr=-DOSC_PRESCALER=0x01
+# ebox.menu.clock.4MHz_internal.build.f_cpu=4000000L
+
+# ebox.menu.clock.2MHz_internal=Internal 2 MHz
+# ebox.menu.clock.2MHz_internal.upload.default_speed=9600
+# ebox.menu.clock.2MHz_internal.bootloader.low_fuses=0xe2
+# ebox.menu.clock.2MHz_internal.build.clkpr=-DOSC_PRESCALER=0x02
+# ebox.menu.clock.2MHz_internal.build.f_cpu=2000000L
+
+# ebox.menu.clock.1MHz_internal=Internal 1 MHz
+# ebox.menu.clock.1MHz_internal.upload.default_speed=9600
+# ebox.menu.clock.1MHz_internal.bootloader.low_fuses=0x62
+# ebox.menu.clock.1MHz_internal.build.clkpr=
+# ebox.menu.clock.1MHz_internal.build.f_cpu=1000000L
 
 
-# Bootloader
-13.menu.bootloader.no_bootloader=No bootloader
-13.menu.bootloader.no_bootloader.upload.maximum_size=1024
-13.menu.bootloader.no_bootloader.fuse.selfprogen=f
-13.menu.bootloader.no_bootloader.bootloader.flash=
-
-13.menu.bootloader.rx_pb1_tx_pb0_0=Yes
-13.menu.bootloader.rx_pb1_tx_pb0_0.upload.protocol=urclock
-13.menu.bootloader.rx_pb1_tx_pb0_0.upload.maximum_size=768
-13.menu.bootloader.rx_pb1_tx_pb0_0.fuse.selfprogen=e
-13.menu.bootloader.rx_pb1_tx_pb0_0.bootloader.file=urboot/watchdog_1_s/{bootloader.clock}/{bootloader.speed}/{bootloader.baudrate}_baud/swio_rxb1_txb0/no-led/urboot_attiny13a.hex
-13.menu.bootloader.rx_pb1_tx_pb0_0.bootloader.flash=-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i
-
-13.menu.bootloader.rx_pb1_tx_pb0_-125=Yes (F_CPU -1.25%)
-13.menu.bootloader.rx_pb1_tx_pb0_-125.upload.protocol=urclock
-13.menu.bootloader.rx_pb1_tx_pb0_-125.upload.maximum_size=768
-13.menu.bootloader.rx_pb1_tx_pb0_-125.fuse.selfprogen=e
-13.menu.bootloader.rx_pb1_tx_pb0_-125.bootloader.file=urboot/watchdog_1_s/{bootloader.clock}/{bootloader.speed-125}/{bootloader.baudrate}_baud/swio_rxb1_txb0/no-led/urboot_attiny13a.hex
-13.menu.bootloader.rx_pb1_tx_pb0_-125.bootloader.flash=-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i
-
-13.menu.bootloader.rx_pb1_tx_pb0_-250=Yes (F_CPU -2.50%)
-13.menu.bootloader.rx_pb1_tx_pb0_-250.upload.protocol=urclock
-13.menu.bootloader.rx_pb1_tx_pb0_-250.upload.maximum_size=768
-13.menu.bootloader.rx_pb1_tx_pb0_-250.fuse.selfprogen=e
-13.menu.bootloader.rx_pb1_tx_pb0_-250.bootloader.file=urboot/watchdog_1_s/{bootloader.clock}/{bootloader.speed-250}/{bootloader.baudrate}_baud/swio_rxb1_txb0/no-led/urboot_attiny13a.hex
-13.menu.bootloader.rx_pb1_tx_pb0_-250.bootloader.flash=-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i
-
-13.menu.bootloader.rx_pb1_tx_pb0_-375=Yes (F_CPU -3.75%)
-13.menu.bootloader.rx_pb1_tx_pb0_-375.upload.protocol=urclock
-13.menu.bootloader.rx_pb1_tx_pb0_-375.upload.maximum_size=768
-13.menu.bootloader.rx_pb1_tx_pb0_-375.fuse.selfprogen=e
-13.menu.bootloader.rx_pb1_tx_pb0_-375.bootloader.file=urboot/watchdog_1_s/{bootloader.clock}/{bootloader.speed-375}/{bootloader.baudrate}_baud/swio_rxb1_txb0/no-led/urboot_attiny13a.hex
-13.menu.bootloader.rx_pb1_tx_pb0_-375.bootloader.flash=-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i
-
-13.menu.bootloader.rx_pb1_tx_pb0_-500=Yes (F_CPU -5.00%)
-13.menu.bootloader.rx_pb1_tx_pb0_-500.upload.protocol=urclock
-13.menu.bootloader.rx_pb1_tx_pb0_-500.upload.maximum_size=768
-13.menu.bootloader.rx_pb1_tx_pb0_-500.fuse.selfprogen=e
-13.menu.bootloader.rx_pb1_tx_pb0_-500.bootloader.file=urboot/watchdog_1_s/{bootloader.clock}/{bootloader.speed-500}/{bootloader.baudrate}_baud/swio_rxb1_txb0/no-led/urboot_attiny13a.hex
-13.menu.bootloader.rx_pb1_tx_pb0_-500.bootloader.flash=-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i
-
-13.menu.bootloader.rx_pb1_tx_pb0_-625=Yes (F_CPU -6.25%)
-13.menu.bootloader.rx_pb1_tx_pb0_-625.upload.protocol=urclock
-13.menu.bootloader.rx_pb1_tx_pb0_-625.upload.maximum_size=768
-13.menu.bootloader.rx_pb1_tx_pb0_-625.fuse.selfprogen=e
-13.menu.bootloader.rx_pb1_tx_pb0_-625.bootloader.file=urboot/watchdog_1_s/{bootloader.clock}/{bootloader.speed-625}/{bootloader.baudrate}_baud/swio_rxb1_txb0/no-led/urboot_attiny13a.hex
-13.menu.bootloader.rx_pb1_tx_pb0_-625.bootloader.flash=-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i
-
-13.menu.bootloader.rx_pb1_tx_pb0_-750=Yes (F_CPU -7.50%)
-13.menu.bootloader.rx_pb1_tx_pb0_-750.upload.protocol=urclock
-13.menu.bootloader.rx_pb1_tx_pb0_-750.upload.maximum_size=768
-13.menu.bootloader.rx_pb1_tx_pb0_-750.fuse.selfprogen=e
-13.menu.bootloader.rx_pb1_tx_pb0_-750.bootloader.file=urboot/watchdog_1_s/{bootloader.clock}/{bootloader.speed-750}/{bootloader.baudrate}_baud/swio_rxb1_txb0/no-led/urboot_attiny13a.hex
-13.menu.bootloader.rx_pb1_tx_pb0_-750.bootloader.flash=-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i
-
-13.menu.bootloader.rx_pb1_tx_pb0_-875=Yes (F_CPU -8.75%)
-13.menu.bootloader.rx_pb1_tx_pb0_-875.upload.protocol=urclock
-13.menu.bootloader.rx_pb1_tx_pb0_-875.upload.maximum_size=768
-13.menu.bootloader.rx_pb1_tx_pb0_-875.fuse.selfprogen=e
-13.menu.bootloader.rx_pb1_tx_pb0_-875.bootloader.file=urboot/watchdog_1_s/{bootloader.clock}/{bootloader.speed-875}/{bootloader.baudrate}_baud/swio_rxb1_txb0/no-led/urboot_attiny13a.hex
-13.menu.bootloader.rx_pb1_tx_pb0_-875.bootloader.flash=-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i
-
-13.menu.bootloader.rx_pb1_tx_pb0_-1000=Yes (F_CPU -10.0%)
-13.menu.bootloader.rx_pb1_tx_pb0_-1000.upload.protocol=urclock
-13.menu.bootloader.rx_pb1_tx_pb0_-1000.upload.maximum_size=768
-13.menu.bootloader.rx_pb1_tx_pb0_-1000.fuse.selfprogen=e
-13.menu.bootloader.rx_pb1_tx_pb0_-1000.bootloader.file=urboot/watchdog_1_s/{bootloader.clock}/{bootloader.speed-1000}/{bootloader.baudrate}_baud/swio_rxb1_txb0/no-led/urboot_attiny13a.hex
-13.menu.bootloader.rx_pb1_tx_pb0_-1000.bootloader.flash=-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i
-
-13.menu.bootloader.rx_pb1_tx_pb0_+125=Yes (F_CPU +1.25%)
-13.menu.bootloader.rx_pb1_tx_pb0_+125.upload.protocol=urclock
-13.menu.bootloader.rx_pb1_tx_pb0_+125.upload.maximum_size=768
-13.menu.bootloader.rx_pb1_tx_pb0_+125.fuse.selfprogen=e
-13.menu.bootloader.rx_pb1_tx_pb0_+125.bootloader.file=urboot/watchdog_1_s/{bootloader.clock}/{bootloader.speed+125}/{bootloader.baudrate}_baud/swio_rxb1_txb0/no-led/urboot_attiny13a.hex
-13.menu.bootloader.rx_pb1_tx_pb0_+125.bootloader.flash=-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i
-
-13.menu.bootloader.rx_pb1_tx_pb0_+250=Yes (F_CPU +2.50%)
-13.menu.bootloader.rx_pb1_tx_pb0_+250.upload.protocol=urclock
-13.menu.bootloader.rx_pb1_tx_pb0_+250.upload.maximum_size=768
-13.menu.bootloader.rx_pb1_tx_pb0_+250.fuse.selfprogen=e
-13.menu.bootloader.rx_pb1_tx_pb0_+250.bootloader.file=urboot/watchdog_1_s/{bootloader.clock}/{bootloader.speed+250}/{bootloader.baudrate}_baud/swio_rxb1_txb0/no-led/urboot_attiny13a.hex
-13.menu.bootloader.rx_pb1_tx_pb0_+250.bootloader.flash=-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i
-
-13.menu.bootloader.rx_pb1_tx_pb0_+375=Yes (F_CPU +3.75%)
-13.menu.bootloader.rx_pb1_tx_pb0_+375.upload.protocol=urclock
-13.menu.bootloader.rx_pb1_tx_pb0_+375.upload.maximum_size=768
-13.menu.bootloader.rx_pb1_tx_pb0_+375.fuse.selfprogen=e
-13.menu.bootloader.rx_pb1_tx_pb0_+375.bootloader.file=urboot/watchdog_1_s/{bootloader.clock}/{bootloader.speed+375}/{bootloader.baudrate}_baud/swio_rxb1_txb0/no-led/urboot_attiny13a.hex
-13.menu.bootloader.rx_pb1_tx_pb0_+375.bootloader.flash=-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i
-
-13.menu.bootloader.rx_pb1_tx_pb0_+500=Yes (F_CPU +5.00%)
-13.menu.bootloader.rx_pb1_tx_pb0_+500.upload.protocol=urclock
-13.menu.bootloader.rx_pb1_tx_pb0_+500.upload.maximum_size=768
-13.menu.bootloader.rx_pb1_tx_pb0_+500.fuse.selfprogen=e
-13.menu.bootloader.rx_pb1_tx_pb0_+500.bootloader.file=urboot/watchdog_1_s/{bootloader.clock}/{bootloader.speed+500}/{bootloader.baudrate}_baud/swio_rxb1_txb0/no-led/urboot_attiny13a.hex
-13.menu.bootloader.rx_pb1_tx_pb0_+500.bootloader.flash=-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i
 
 
-###########################################################
-minisphinx.name=miniSphinx
 
-minisphinx.vid.0=0x2341
-minisphinx.pid.0=0x0010
-minisphinx.vid.1=0x2341
-minisphinx.pid.1=0x0042
-minisphinx.vid.2=0x2A03
-minisphinx.pid.2=0x0010
-minisphinx.vid.3=0x2A03
-minisphinx.pid.3=0x0042
-minisphinx.vid.4=0x2341
-minisphinx.pid.4=0x0210
-minisphinx.vid.5=0x2341
-minisphinx.pid.5=0x0242
-
-minisphinx.upload.tool=avrdude
-minisphinx.upload.maximum_data_size=8192
-
-minisphinx.bootloader.tool=avrdude
-minisphinx.bootloader.low_fuses=0xFF
-minisphinx.bootloader.unlock_bits=0x3F
-minisphinx.bootloader.lock_bits=0x0F
-
-minisphinx.build.f_cpu=16000000L
-minisphinx.build.core=arduino
-minisphinx.build.variant=mega
-# default board may be overridden by the cpu menu
-minisphinx.build.board=AVR_MEGA2560
-
-minisphinx.upload.protocol=wiring
-minisphinx.upload.maximum_size=253952
-minisphinx.upload.speed=115200
-
-minisphinx.bootloader.high_fuses=0xD8
-minisphinx.bootloader.extended_fuses=0xFD
-minisphinx.bootloader.file=stk500v2/stk500boot_v2_mega2560.hex
-
-minisphinx.build.mcu=atmega2560
-minisphinx.build.board=AVR_MEGA2560

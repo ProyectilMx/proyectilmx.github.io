@@ -1,7 +1,6 @@
-Arduino JSON for RobbusKidsy ESP32 powered by ProyectilMx
+Biblioteca Proyectil Mx Boards 
 
+Link para instalar placas de MCU AVR
 https://proyectilmx.github.io/arduino-board-index/package_ProyectilMx_index.json
 
-Biblioteca para Robbus Kidsy:
-
-https://github.com/ProyectilMx/Robbus-Kidsy
+Si se utiliza el programador USBTinyISP se recomienda intalar el driver libusbK 
